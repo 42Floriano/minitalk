@@ -6,11 +6,27 @@
 /*   By: falberti <falberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:19:40 by falberti          #+#    #+#             */
-/*   Updated: 2024/03/19 17:07:12 by falberti         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:52:29 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
+
+static	int	check_av(char **av)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strlen(av[1]) == 0 || ft_strlen(av[2]) == 0)
+		return (0);
+	while (av[1][i])
+	{
+		if (!ft_isdigit(ft_atoi(av[1][i])))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 static	void	send_signal(int pid, char *str)
 {
@@ -48,7 +64,7 @@ int	main(int ac, char **av)
 	int		pid;
 	char	*str;
 
-	if (ac == 3)
+	if (ac == 3 && check_av(av))
 	{
 		pid = ft_atoi(av[1]);
 		str = av[2];
@@ -58,7 +74,7 @@ int	main(int ac, char **av)
 	else
 	{
 		ft_printf("Arguments incorrect !!\n");
-		ft_printf("Please enter the PID and one string\n");
+		ft_printf("Please enter the PID and one non-empty string\n");
 	}
 	return (0);
 }

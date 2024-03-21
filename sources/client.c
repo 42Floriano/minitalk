@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: falberti <falberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albertini <albertini@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:19:40 by falberti          #+#    #+#             */
-/*   Updated: 2024/03/19 18:52:29 by falberti         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:17:26 by albertini        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-
+// Hola
 static	int	check_av(char **av)
 {
 	int	i;

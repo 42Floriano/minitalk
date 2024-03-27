@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albertini <albertini@student.42.fr>        +#+  +:+       +#+        */
+/*   By: falberti <falberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:19:40 by falberti          #+#    #+#             */
-/*   Updated: 2024/03/21 21:17:26 by albertini        ###   ########.fr       */
+/*   Updated: 2024/03/27 13:49:54 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-// Hola
+
 static	int	check_av(char **av)
 {
 	int	i;
@@ -21,7 +21,7 @@ static	int	check_av(char **av)
 		return (0);
 	while (av[1][i])
 	{
-		if (!ft_isdigit(ft_atoi(av[1][i])))
+		if (!ft_isdigit(av[1][i]))
 			return (0);
 		i++;
 	}
@@ -42,15 +42,9 @@ static	void	send_signal(int pid, char *str)
 		while (shift < 7)
 		{
 			if ((str[i] >> shift) & 1)
-			{
-				printf("1");
-				kill(pid, SIGUSR2);	
-			}
+				kill(pid, SIGUSR2);
 			else
-			{
-				printf("0");
-				kill(pid, SIGUSR1);	
-			}
+				kill(pid, SIGUSR1);
 			shift++;
 			usleep(500);
 		}

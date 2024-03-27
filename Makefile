@@ -6,7 +6,7 @@
 #    By: falberti <falberti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 12:00:27 by falberti          #+#    #+#              #
-#    Updated: 2024/03/18 14:24:07 by falberti         ###   ########.fr        #
+#    Updated: 2024/03/27 13:03:13 by falberti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,10 @@ CC = gcc
 CFLAGS = -Werror -Wextra -Wall -I $(HEADER) -g
 LIBFT = includes/libft/libftxl.a
 
+## -fsanitize=address
 all: $(LIBFT)
-	$(CC) $(CFLAGS) -fsanitize=address $(SOURCES)/server.c  $(LIBFT) -o server
-	$(CC) $(CFLAGS) -fsanitize=address $(SOURCES)/client.c $(LIBFT)  -o client
+	$(CC) $(CFLAGS) $(SOURCES)/server.c  $(LIBFT) -o server
+	$(CC) $(CFLAGS) $(SOURCES)/client.c $(LIBFT)  -o client
 
 $(LIBFT):
 	$(MAKE) -C includes/libft

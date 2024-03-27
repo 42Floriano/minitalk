@@ -6,7 +6,7 @@
 /*   By: falberti <falberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:19:04 by falberti          #+#    #+#             */
-/*   Updated: 2024/03/27 14:12:41 by falberti         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:40:52 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 
 static t_var	g_char;
 
-static void	read_bit(int signum)
+static void	read_bit(int signum, siginfo_t *info, void *ucontent)
 {
 	g_char.c += ((signum & 1) << g_char.i);
 	g_char.i += 1;
+	(void)ucontent;
+	(void)info;
 	if (g_char.i == 7)
 	{
 		write(1, &g_char.c, 1);
 		if (g_char.c == '\0')
+		{
 			write(1, "\n", 1);
+			usleep(1000);
+			kill(info->si_pid, SIGUSR2);
+		}
 		g_char.i = 0;
 		g_char.c = 0;
 	}
@@ -34,7 +40,8 @@ int	main(void)
 
 	g_char.i = 0;
 	g_char.c = 0;
-	sa.sa_handler = read_bit;
+	sa.sa_sigaction = &read_bit;
+	sa.sa_flags = SA_SIGINFO;
 	ft_printf("Welcome to Floriano's Server!\n");
 	ft_printf("My Server PID is: %d\n", getpid());
 	while (1)

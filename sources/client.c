@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: falberti <falberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albertini <albertini@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:19:40 by falberti          #+#    #+#             */
-/*   Updated: 2024/03/27 16:48:58 by falberti         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:10:00 by albertini        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ int	main(int ac, char **av)
 		while (1)
 		{
 			sigaction(SIGUSR2, &sa, NULL);
-			pause();
-			// usleep(100000);
-			// return (1);
+			usleep(100000);
+			return (1);
 		}
 	}
 	else

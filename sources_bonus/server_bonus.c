@@ -6,7 +6,7 @@
 /*   By: falberti <falberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:19:04 by falberti          #+#    #+#             */
-/*   Updated: 2024/03/28 13:23:10 by falberti         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:26:23 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	read_bit(int signum, siginfo_t *info, void *ucontent)
 	(void)info;
 	if (g_char.i == 7)
 	{
-		ft_putchar_fd(g_char.c, STDOUT_FILENO);
+		write(1, &g_char.c, 1);
 		if (g_char.c == '\0')
 		{
 			write(1, "\n", 1);

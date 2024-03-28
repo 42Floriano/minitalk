@@ -6,11 +6,18 @@
 /*   By: falberti <falberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:19:40 by falberti          #+#    #+#             */
-/*   Updated: 2024/03/28 12:53:57 by falberti         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:42:24 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
+
+static void	msg_rcved(int signum)
+{
+	(void)signum;
+	write(1, "Message received succesfully!\n", 31);
+	exit(0);
+}
 
 static	int	check_av(char **av)
 {
@@ -57,13 +64,21 @@ int	main(int ac, char **av)
 {
 	int					pid;
 	char				*str;
+	struct sigaction	sa;
 
 	if (ac == 3 && check_av(av))
 	{
 		pid = ft_atoi(av[1]);
 		str = av[2];
+		sa.sa_handler = &msg_rcved;
 		send_signal(pid, str);
 		ft_printf("Message sent succesfully!\n");
+		while (1)
+		{
+			sigaction(SIGUSR2, &sa, NULL);
+			usleep(100000);
+			return (1);
+		}
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: falberti <falberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:19:04 by falberti          #+#    #+#             */
-/*   Updated: 2024/03/28 12:54:30 by falberti         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:39:57 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ static void	read_bit(int signum, siginfo_t *info, void *ucontent)
 	{
 		write(1, &g_char.c, 1);
 		if (g_char.c == '\0')
+		{
 			write(1, "\n", 1);
+			usleep(10000);
+			kill(info->si_pid, SIGUSR2);
+		}
 		g_char.i = 0;
 		g_char.c = 0;
 	}

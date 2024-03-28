@@ -6,13 +6,14 @@
 #    By: falberti <falberti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 12:00:27 by falberti          #+#    #+#              #
-#    Updated: 2024/03/27 16:43:32 by falberti         ###   ########.fr        #
+#    Updated: 2024/03/28 12:55:52 by falberti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## Sources
 LIBRARY = includes
 SOURCES = sources
+BSOURCES = sources_bonus
 
 HEADER = $(LIBRARY)/minitalk.h
 
@@ -35,6 +36,12 @@ fclean: clean
 	$(MAKE) -C includes/libft fclean
 	rm -f server client
 
+bonus: $(LIBFT)
+	$(CC) $(CFLAGS) $(BSOURCES)/server_bonus.c  $(LIBFT) -o server
+	$(CC) $(CFLAGS) $(BSOURCES)/client_bonus.c $(LIBFT)  -o client
+
 re: fclean all
 
-.PHONY: all clean fclean re
+bre: fclean bonus
+
+.PHONY: all clean fclean re bonus bre
